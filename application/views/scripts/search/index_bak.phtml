@@ -1,0 +1,183 @@
+
+<div class="center_content">
+        <div class="left_content">
+            
+  <div class="center_content">
+        <div class="left_content">
+            
+
+            
+<div class="contact_form">
+     <div class="form_subtitle">All fields are requierd</div>          
+          <div class="form_row">
+  
+    <?php     echo $this->form; ?>
+         </div>      
+</div>
+     <div class="clear"></div>
+     
+        </div>
+
+       </div><!--end of center content-->
+        
+
+
+<!--/////////////Google Maps Section ///////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////-->
+              
+      
+        </div><!--end of left content-->
+       
+           <div class="clear"></div>
+           </div><!--end of center content-->
+           <div>
+
+<style type="text/css">
+.sideNav {
+    border: 2px solid red;
+}
+</style>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" 
+rel="stylesheet" type="text/css" />
+
+
+
+<script type="text/javascript">
+ 
+ var icon = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/micons/red.png",
+    new google.maps.Size(32, 32), new google.maps.Point(0, 0),
+    new google.maps.Point(16, 32));
+ 
+            var center = null;
+            var map = null;
+            var currentPopup;
+            var bounds = new google.maps.LatLngBounds();
+ 
+    function addMarker(lat, lng, info) {
+        
+ 
+    var pt = new google.maps.LatLng(lat, lng);
+    bounds.extend(pt);
+ 
+    var marker = new google.maps.Marker({
+        position: pt,
+        icon: icon,
+        map: map
+    });
+ 
+    var popup = new google.maps.InfoWindow({
+        content:'<div style="-moz-border-radius: 10px;" >' + info + '</div><br />' + '<br />'+
+        '<img src="image.jpg" width=150 height=100>' +
+        info,
+        maxWidth: 300,
+        maxHeight: 400,
+    });
+ 
+        google.maps.event.addListener(marker, "click", function() {
+ 
+        if (currentPopup != null) {
+             currentPopup.close();
+             currentPopup = null;
+        }
+    
+         popup.open(map, marker);
+        currentPopup = popup;
+        });
+ 
+     google.maps.event.addListener(popup, "closeclick", function() {
+     map.panTo(center);
+     currentPopup = null;
+     });
+ 
+}
+ 
+
+        function initialize() {
+        map = new google.maps.Map(document.getElementById("map"), {
+        
+        center: new google.maps.LatLng(0, 0),
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+ 
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+    },
+ 
+    navigationControl: true,
+    navigationControlOptions: {
+    style: google.maps.NavigationControlStyle.SMALL
+ 
+    }
+ 
+    });
+ <?php
+
+ $zipResult = "67701";
+ if(isset($this->searchResult)):
+ foreach($this->searchResult as $resultt):
+ 
+ $desc = $resultt['name']."<br /><br />".
+ "<a href=/search/get-details/id/".$resultt['id'].">Details</a><br />";
+
+ $zip = new Application_Model_Zipcode();
+  $dd = $resultt['zipcode'];
+  $where = "zip_code = '$dd'"; 
+  
+  $zipResult = $zip->fetchAll($where)->toArray();
+  
+
+
+ foreach ($zipResult as $valuee) {
+     
+      $lat = $valuee['lat'];
+      $lon = $valuee['lon'];
+      // $useriID = $resultt['user_id'];
+
+//     $PicId = new Application_Model_UserPics();
+//     $where = "profile_id = '$useriID";
+  echo ("addMarker($lat, $lon,'<br/>$desc');\n");
+
+   
+  }
+
+ 
+
+ endforeach;
+ ?>
+ center = bounds.getCenter();
+ map.fitBounds(bounds);
+
+ }
+ </script>
+
+
+<?php // echo $this->paginationControl($this->searchResult, 'Sliding', 'pagination.phtml'); ?>
+
+<div id="map" style="width:900px; height:400px"></div>
+<div class="sideNav">
+<?php
+      foreach($this->searchResult as $resultt):
+   echo $resultt['id']." "."| ";
+   echo $resultt['name']." "."| ";
+   echo $resultt['amount']." "."| ";
+   $getStates = new Application_Model_State();
+   
+   $where = 'state_id ='. $resultt['state'];
+
+   $stateResult =$getStates->fetchAll($where)->toArray();
+   foreach ($stateResult as $value) 
+                  {
+                    echo $value['state']. " "."| ";
+                  } 
+   
+   echo "<a href=/search/get-details/id/".$resultt['id'].">".substr($resultt['details'], 0,50)."..."."</a><br />";
+
+  endforeach;
+  endif;
+ ?>
+</div>
+
+           </div>
+
+

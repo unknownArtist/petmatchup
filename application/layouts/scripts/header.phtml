@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>This is petmatchup</title> 
+       
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('../css/main.css'); ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('../css/lightbox.css'); ?>
+        " />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.js"> </script>
+     
+
+       <script src="<?php echo $this->baseUrl('../js/main.js'); ?>" language="javascript" type="text/javascript"></script> 
+
+  <script language="javascript">
+function submitForms(){
+document.mapApi.submit();
+document.profile.submit();
+}
+</script>
+    </head>
+    <body >
+
+    <div id="yourinfo">
+    <div id="wrap">
+      
+        <div class="header">
+      
+        <div class="logo"><a href="index.html"><img src="../img/logo.gif" alt="" title="" border="0" /></a></div> 
+      
+            <div id="menu">
+              <ul>
+                
+                <li class="selected"> <a href="/index">Home</a> </li> 
+                <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
+                
+                <li> <a href="/profile">Profile</a> </li>
+                <?php endif; ?>
+           
+                <li> <a href="/search">Search</a></li>
+
+                <li> <a href="/contactus">Contact</a></li>
+              
+            
+       
+       
+         <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
+
+                <li>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'edit-profile'   )); ?>">Edit User</a>
+            
+                </li>
+              
+       
+                <li>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'logout')); ?>">logout</a>
+                </li>
+      
+         <?php  endif; ?> 
+
+            </ul>
+            </div>
+         </div>

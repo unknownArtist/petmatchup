@@ -1,0 +1,26 @@
+
+
+<?php 
+		
+	foreach ($this->listProfiles as $profiles):
+		
+		echo $profiles['user_id']."<br />";
+		echo $profiles['name']."<br />";
+		echo $profiles['email']."<br />";
+		echo $profiles['profile_created_on']."<br />";
+		echo "<form>";
+		echo "<input type=checkbox id='btnClick' name='email[]'"."value=".$profiles['email'].">";
+		echo "</form>";
+		echo "<br />";
+		echo "______________________________<br /><br />";
+
+		
+		
+	endforeach;
+
+	?>
+
+	<?php echo $this->form; ?>
+<?php  echo $this->paginationControl($this->listProfiles, 'Sliding', 'pagination.phtml'); ?>
+
+<div class="result"> </div>

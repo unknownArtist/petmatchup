@@ -1,0 +1,63 @@
+<?php foreach($this->petDetails as $pd): ?>
+<ul>
+
+	<strong>Name</strong><li> <?php	echo $pd['name'];  ?></li>
+	<strong>Type</strong><li> 
+	<?php	
+			$profileType = new Application_Model_ProfileType();
+			$where = 'id = '. $pd['type'];
+			$ptype = $profileType->fetchAll($where)->toArray();
+			foreach($ptype as $pt):
+			echo $pt['name'];
+			endforeach;
+	 ?>
+	 </li>
+	
+	
+	<strong>State</strong><li><?php 
+			$getStates = new Application_Model_State();	
+			$stateResult = $getStates->fetchAll("state_id =".$pd['state'])->toArray();
+			foreach ($stateResult as $value){echo $stateRow = $value['state'];}
+
+
+				?>
+	</li>
+	<strong>Country</strong><li> <?php  if(isset($pd['country'])) {	echo "America"; }?></li>
+ 	<strong>City</strong><li> <?php	echo $pd['city'];  ?></li>
+ 	<strong>Race</strong><li> <?php	echo $pd['race'];  ?></li>
+
+	<strong>Amount</strong><li><?php  echo $pd['amount']; ?></li>
+	<strong>Sex</strong><li> <?php  echo $pd['sex']; ?></li>
+    <strong>Papers</strong><li> <?php  if($pd['papers'] == '1'){ echo "Yes";}else{ echo "No";} ?></li>
+   <strong> Negotiable</strong><li><?php  if($pd['negotiable'] == '1') { echo 'Yes'; }else{ echo 'No'; } ?></li>
+    <strong>Details</strong><li> <?php  echo $pd['details']; ?></li>
+     
+
+
+  <?php if(isset($this->petPics)): ?>
+  <?php foreach($this->petPics as $pp): ?>
+  
+  <img src="/images/<?php echo $pp['picture'];  ?>" height="100" width="120" />
+  
+      
+   
+	    <?php endforeach; ?>
+	  <?php endif; ?>
+ 
+</ul>
+<?php if(!isset($this->trueVal)) 
+{
+ echo "<button>Contact Person</button>";
+}
+ ?>
+<div id="captcha" style="display: none"><?php echo $this->captchaForm; ?></div>
+<?php if(isset($this->trueVal)){
+	   
+	   echo "<ul><li><strong>". $pd['email']. "</strong></li></ul>"; 
+	   echo "<ul><li><strong>". $pd['phone']. "</strong></li></ul>";
+}
+
+	  
+ ?>
+ <?php endforeach; ?>
+

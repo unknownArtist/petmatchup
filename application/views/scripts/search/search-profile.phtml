@@ -1,0 +1,111 @@
+
+<style type="text/css">
+.sideNav {
+    border: 2px solid red;
+}
+</style>
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" 
+rel="stylesheet" type="text/css" />
+
+
+
+<script type="text/javascript">
+ //Sample code written by August Li
+ var icon = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/micons/red.png",
+    new google.maps.Size(32, 32), new google.maps.Point(0, 0),
+    new google.maps.Point(16, 32));
+ 
+            var center = null;
+            var map = null;
+            var currentPopup;
+            var bounds = new google.maps.LatLngBounds();
+ 
+    function addMarker(lat, lng, info) {
+        
+ 
+    var pt = new google.maps.LatLng(lat, lng);
+    bounds.extend(pt);
+ 
+    var marker = new google.maps.Marker({
+        position: pt,
+        icon: icon,
+        map: map
+    });
+ 
+    var popup = new google.maps.InfoWindow({
+        content: info ,
+        maxWidth: 300
+    });
+ 
+        google.maps.event.addListener(marker, "click", function() {
+ 
+        if (currentPopup != null) {
+             currentPopup.close();
+             currentPopup = null;
+        }
+    
+         popup.open(map, marker);
+        currentPopup = popup;
+        });
+ 
+     google.maps.event.addListener(popup, "closeclick", function() {
+     map.panTo(center);
+     currentPopup = null;
+     });
+ 
+}
+ 
+
+        function initialize() {
+        map = new google.maps.Map(document.getElementById("map"), {
+        
+        center: new google.maps.LatLng(0, 0),
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+ 
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+    },
+ 
+    navigationControl: true,
+    navigationControlOptions: {
+    style: google.maps.NavigationControlStyle.SMALL
+ 
+    }
+ 
+    });
+ <?php
+ foreach($this->searchResult as $resultt):
+ 
+ $lat=$resultt['Latitude'];
+ $lon=$resultt['Longitude'];
+ //$desc=addslashes($resultt['user_id']);
+ //$desc = $resultt['name']."<br /><br />".
+ //"<a href=/search/get-details/id/".$resultt['user_id'].">Details</a><br />"."zo zo";
+
+
+ if($lat!='0' && $lon!='0')
+ {
+ echo ("addMarker($lat, $lon,'<br/>$desc');\n");
+ }
+ endforeach;
+ ?>
+ center = bounds.getCenter();
+ map.fitBounds(bounds);
+
+ }
+ </script>
+
+
+<?php // echo $this->paginationControl($this->searchResult, 'Sliding', 'pagination.phtml'); ?>
+
+<div id="map" style="width:800px; height:300px"></div>
+<div class="sideNav">
+<?php
+      foreach($this->searchResult as $resultt):
+ 
+   echo "<a href=/search/get-details/id/".$resultt['id'].">".substr($resultt['details'], 0,50)."..."."</a><br />";
+  endforeach;
+ ?>
+</div>
