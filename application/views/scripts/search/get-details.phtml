@@ -22,15 +22,21 @@
 
 				?>
 	</li>
-	<strong>Country</strong><li> <?php  if(isset($pd['country'])) {	echo "America"; }?></li>
- 	<strong>City</strong><li> <?php	echo $pd['city'];  ?></li>
- 	<strong>Race</strong><li> <?php	echo $pd['race'];  ?></li>
+	<strong>Country</strong> <?php  if(isset($pd['country'])) {	echo "<li>"."America"."</li>"; }?>
+ 	
+ 	<strong>City</strong> <?php  if(isset($pd['city'])) {	echo "<li>".$pd['city']."</li>"; }?>
+ 	
+ 	<strong>Race</strong> <?php	echo "<li>".$pd['race']."</li>";  ?>
 
-	<strong>Amount</strong><li><?php  echo $pd['amount']; ?></li>
-	<strong>Sex</strong><li> <?php  echo $pd['sex']; ?></li>
-    <strong>Papers</strong><li> <?php  if($pd['papers'] == '1'){ echo "Yes";}else{ echo "No";} ?></li>
-   <strong> Negotiable</strong><li><?php  if($pd['negotiable'] == '1') { echo 'Yes'; }else{ echo 'No'; } ?></li>
-    <strong>Details</strong><li> <?php  echo $pd['details']; ?></li>
+	<strong>Amount</strong><?php  echo "<li>".$pd['amount']."</li>"; ?>
+	
+	<strong>Sex</strong> <?php  echo "<li>".$pd['sex']."</li>"; ?>
+    
+    <strong>Papers</strong> <?php  if($pd['papers'] == '1'){ echo "<li>".'Yes'."</li>";}else{ echo "<li>".'No'."</li>";} ?>
+   
+   <strong> Negotiable</strong><?php  if($pd['negotiable'] == '1') { echo "<li>".'Yes'."</li>"; }else{ echo "<li>".'No'."</li>"; } ?>
+   
+    <strong>Details</strong> <?php  echo "<li>".$pd['details']."</li>"; ?>
      
 
 

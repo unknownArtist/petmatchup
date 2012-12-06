@@ -32,7 +32,7 @@ class SearchController extends Zend_Controller_Action
         $Country      = $this->getRequest()->getParam('Country');
         $stateRow     = $this->getRequest()->getParam('states');
         $zip          = $this->getRequest()->getParam('zip');
-        $stateResult = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
+        $stateResult  = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
         $stateRow = $stateResult[0]['state_id'];
         
 
@@ -75,9 +75,10 @@ class SearchController extends Zend_Controller_Action
             $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
         }
-              
+        
           $result=$selectDetails;
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
+                
                 $Paginatedresult = $searchResult->setItemCountPerPage(250)->
                     setCurrentPageNumber($this->_getParam('page', 1));
      
