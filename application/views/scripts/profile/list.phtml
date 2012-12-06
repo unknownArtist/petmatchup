@@ -1,0 +1,19 @@
+<?php 	foreach ($this->userProfiles as $userProfiless): ?>
+
+
+<div>
+	<a href="/search/get-details/id/<?php echo $userProfiless['id']; ?>"><?php echo $userProfiless['name']?></a>
+	<a href="/profile/edit/id/<?php echo $userProfiless['id'] ?>">Edit</a>
+	<a href="/profile/delete/id/<?php echo $userProfiless['id'] ?>">Delete</a>
+	<?php 
+		   $ProfilePicture = new Application_Model_UserPics();
+           $where = "profile_id =".$userProfiless['id'];
+           $getProfilePictures = $ProfilePicture->fetchRow($where);
+	?>
+
+	<img src="/images/<?php echo $getProfilePictures->picture; ?>" height="100" width="120">
+</div>
+
+
+<?php endforeach; ?>
+<a href="/profile/add">Add Profile</a>
