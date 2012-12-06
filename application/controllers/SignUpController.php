@@ -78,8 +78,8 @@ class SignUpController extends Zend_Controller_Action
        $smtpConfigs = array(
             
             'auth'          =>      'login',
-            'username'      =>      '',
-            'password'      =>      '',
+            'username'      =>      'nayab.rajpoot',
+            'password'      =>      'jeerry1979',
             'ssl'           =>      'ssl',
             'port'          =>       465
             

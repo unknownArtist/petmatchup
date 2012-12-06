@@ -10,39 +10,30 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
         $SearchForm = new Application_Form_Search();
         $this->view->form = $SearchForm;
-
         $AppliedSearch = Zend_Db_Table::getDefaultAdapter();
         $selectDetails = new Zend_Db_Select($AppliedSearch);
         $getStates = new Application_Model_State();
 
         $values=$this->getRequest()->getParams();
-        
+
         
         if (!empty($values['profileType'])) {
         
         $formData = $values;
-            if($SearchForm->isValid($formData)) {
-                $protype = $SearchForm->getValue('profileType');
-                $whichAnimal = $SearchForm->getValue('kind');
-                $race = $SearchForm->getValue('race');
-                $MaleFemale = $SearchForm->getValue('sex');
-                $Country = $SearchForm->getValue('Country');
-                $state = $SearchForm->getValue('states');
-
-
-                $city = $SearchForm->getValue('city');
-                $zip = $SearchForm->getValue('zip');
-                $stateResult = $getStates->fetchAll("state_abbr = '$state'")->toArray();
-                foreach ($stateResult as $value) {
-                    $stateRow = $value['state_id'];
-                }
-
-
-   $selectDetails = $selectDetails->from('profiles');
-
+            if($SearchForm->isValid($formData))
+            {
+          
+        $protype      = $this->getRequest()->getParam('profileType');
+        $whichAnimal  = $this->getRequest()->getParam('kind');
+        $race         = $this->getRequest()->getParam('race');
+        $MaleFemale   = $this->getRequest()->getParam('sex');
+        $Country      = $this->getRequest()->getParam('Country');
+        $stateRow     = $this->getRequest()->getParam('states');
+        $zip          = $this->getRequest()->getParam('zip');
+        
+        $selectDetails = $selectDetails->from('profiles');
 
         if (!empty($protype)) {
 
@@ -58,13 +49,6 @@ class SearchController extends Zend_Controller_Action
         if (!empty($MaleFemale)) {
 
             $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
-
-        }
-        
-        
-        if (!empty($city)) {
-
-            $selectDetails = $selectDetails->where('city=?',$city);
 
         }
         
@@ -85,18 +69,11 @@ class SearchController extends Zend_Controller_Action
         }
         if (!empty($zip)) {
 
-            $selectDetails = $selectDetails->where('zip LIKE ?',"$zip%");
+            $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
         }
-        
-    //    
-//        echo $selectDetails;
-//        die ("D");  
-          
+              
           $result=$selectDetails;
-          
-          
-          
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
                 $Paginatedresult = $searchResult->setItemCountPerPage(250)->
                     setCurrentPageNumber($this->_getParam('page', 1));
