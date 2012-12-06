@@ -24,7 +24,7 @@ class IndexController extends Zend_Controller_Action
             if ($form->isValid($formData)) 
                 {
                 $email    = $form->getValue('email');
-                $password = sha1($form->getValue('password'));
+                $password = sha1($form->getValue('password')); echo $password; die();
                 $authAdapter->setIdentity($email)
                             ->setCredential($password);
                 

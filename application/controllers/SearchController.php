@@ -32,9 +32,12 @@ class SearchController extends Zend_Controller_Action
         $Country      = $this->getRequest()->getParam('Country');
         $stateRow     = $this->getRequest()->getParam('states');
         $zip          = $this->getRequest()->getParam('zip');
+        $stateResult = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
+        $stateRow = $stateResult[0]['state_id'];
         
-        $selectDetails = $selectDetails->from('profiles');
 
+
+        $selectDetails = $selectDetails->from('profiles');
         if (!empty($protype)) {
 
             $selectDetails = $selectDetails->where('type =?',$protype);
@@ -62,8 +65,8 @@ class SearchController extends Zend_Controller_Action
             $selectDetails = $selectDetails->where('race LIKE ?',"$race%");
 
         }
-         if (!empty($state)) {
-            
+         if (!empty($stateRow)) {
+             
             $selectDetails = $selectDetails->where('state =?',$stateRow);
 
         }
@@ -77,8 +80,7 @@ class SearchController extends Zend_Controller_Action
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
                 $Paginatedresult = $searchResult->setItemCountPerPage(250)->
                     setCurrentPageNumber($this->_getParam('page', 1));
-                
-          
+     
         if ( count($Paginatedresult) ) {
           $this->view->searchResult = $Paginatedresult;
         }  
