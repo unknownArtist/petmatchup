@@ -25,7 +25,7 @@ class SignUpController extends Zend_Controller_Action
                  'f_name'             => $form->getValue('f_name'),
                  'l_name'             => $form->getValue('l_name'),
                  'email'              => $form->getValue('email'),
-                 'password'           => $pass,
+                 'password'           => sha1($pass),
                  'friend1'            => $form->getValue('friend1')
                  );
                 
