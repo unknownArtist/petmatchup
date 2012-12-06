@@ -14,8 +14,16 @@ class ProfileController extends Zend_Controller_Action
            $getProfiles = new Application_Model_Profile();
            $where = "id =".$this->_request->getParam('id');
            $userProfiles = $getProfiles->delete($where);
+          
+           $getPics = new Application_Model_UserPics();
+           $where = "profile_id =".$this->_request->getParam('id');
+           $data = array(
+                  'status'              =>   '0'
+                  );
+           $getPics->update($data,$where);
            $this->_redirect('/profile/list');
-        }
+
+}
     }
 
     public function editAction()
@@ -163,6 +171,7 @@ class ProfileController extends Zend_Controller_Action
                                 $updatedImages = array(
                                     'picture'    => $value,
                                     'profile_id' => $profileID['id'],
+                                    'status'     => '1'
                                     );                          
                                $profilePicutres->insert($updatedImages);
                             }
