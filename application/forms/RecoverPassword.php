@@ -5,7 +5,7 @@ class Application_Form_RecoverPassword extends Zend_Form
 
     public function init()
     {
-         $this->setAction('#');
+        $this->setAction('');
         $this->setMethod('post');
 
 
