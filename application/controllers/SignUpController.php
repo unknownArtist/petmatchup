@@ -93,8 +93,8 @@ class SignUpController extends Zend_Controller_Action
   
  
         $mail->addTo($email,"john evans")
-             ->setFrom('nayatelorg@gmail.com', "nayatel")
-             ->setSubject('Accounet Confirmation')
+             ->setFrom('habibsehrish@gmail.com', "nayatel")
+             ->setSubject('Account Confirmation')
              ->setBodyText('your pin code is '. " " .$pass . " " .'After you logged in kindly set you desired password')
              ->send($smtpTransportObject);
         
@@ -155,11 +155,11 @@ class SignUpController extends Zend_Controller_Action
                   $getEmail = new Application_Model_SignUp();
                   $formEmail = $form->getValue('email');
                   $where = "email = '$formEmail'";
-                  $email = $getEmail->fetchAll($where)->toArray();
+                  $email = $getEmail->fetchRow($where)->toArray();
                   if($email)
                   {
-
-                      $data = array('password' => $randNumber = $this->randGenAction());
+                      $randNumber = $this->randGenAction();
+                      $data = array('password' => sha1($randNumber));
                       $getEmail->update($data, $where);
                       $this->mailToContactAction($formEmail,$randNumber);
 
