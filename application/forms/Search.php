@@ -43,7 +43,7 @@ class Application_Form_Search extends Zend_Form
         
         //////////////////////////////////////////////////////////////////
         
-        $this->setMethod('post');
+        $this->setMethod('get');
         // $this->setAction('search/search-Profile');
         $this->setAction('#');
         $protype = new Zend_Form_Element_Select('profileType');
