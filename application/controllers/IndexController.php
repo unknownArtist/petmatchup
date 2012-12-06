@@ -81,7 +81,7 @@ class IndexController extends Zend_Controller_Action
 
                   'f_name'               =>   $form->getValue('f_name'),
                   'l_name'               =>   $form->getValue('l_name'),
-                  'password'             =>   $form->getValue('Password'),
+                  'password'             =>   sha1($form->getValue('Password')),
                   'friend1'              =>   $form->getValue('friend1')
 
                   );
