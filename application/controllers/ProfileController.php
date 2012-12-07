@@ -139,13 +139,15 @@ class ProfileController extends Zend_Controller_Action
                         {
                           $where = "picture = ".$picnumber;
                           $profileID = $profile->fetchRow($where)->toArray();
+                        
+
                           $picData = array(
                             $form->getValue("pic_upload"),
                             $form->getValue("pic_uploadSec"),
                             $form->getValue("pic_uploadThird"),
                             $form->getValue("pic_uploadFourth"),
                             );
-
+                                 
                           foreach ($picData as $value) {
                             if(isset($value))
                             {
@@ -153,8 +155,15 @@ class ProfileController extends Zend_Controller_Action
                                     'picture'    => $value,
                                     'profile_id' => $profileID['id'],
                                     'status'     => '1'
-                                    );                          
+                                    );   
+
+                                  // $value->image_resize = true;
+                                  // $value->image_convert = gif;
+                                  // $value->image_x = 100;
+                                  // $value->image_ratio_y = true;
+                                  // $value->Process('/public/images/');                       
                                $profilePicutres->insert($updatedImages);
+                               
                             }
                             
                         }

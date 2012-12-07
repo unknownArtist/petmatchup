@@ -195,8 +195,14 @@ class Application_Form_Profile extends Zend_Form
          $picupload->setLabel('Select the file to upload:')
                       ->setDestination(APPLICATION_PATH.'/../public/images')
                       ->addValidator('Count', false, 1) // ensure only 1 file
-                      ->addValidator('Size', false, 8097152) // limit to 6MB
+                      ->addValidator('Size', false, 8097152)
                       ->addValidator('Extension', false, 'jpg,jpeg,png,gif');
+                      // $picupload->image_resize = true;
+                      // $picupload->image_convert = gif;
+                      // $picupload->image_x = 50;
+                      // $picupload->image_ratio_y = true;
+                      //$picupload->Process('/public/images');    // limit to 6MB
+                     
                    
         $picuploadSec        = new Zend_Form_Element_File('pic_uploadSec');
          $picuploadSec->setLabel('Select the file to upload:')
