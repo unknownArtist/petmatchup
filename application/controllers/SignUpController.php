@@ -28,7 +28,6 @@ class SignUpController extends Zend_Controller_Action
                  'password'           => sha1($pass),
                  'friend1'            => $form->getValue('friend1')
                  );
-                
                 $emailAddress = $form->getValue('email');
                 $CheckEmail = new Application_Model_SignUp();
                 $where = "email = '$emailAddress'";
@@ -37,12 +36,10 @@ class SignUpController extends Zend_Controller_Action
                 {
                    $this->view->errorMsg = "This email is already registered";
                    $form->populate($formData);
-                  
                    
                 }
                 else
                 {
-         
                       $signupDB = new Application_Model_SignUp();
                      if($signupDB->insert($data))
                      {
@@ -110,35 +107,35 @@ class SignUpController extends Zend_Controller_Action
     public function randGenAction()
     {
        $length=15;
-       $strength=0;
-       
-        $vowels = 'aeuy';
-	$consonants = 'bdghjmnpqrstvz';
-	if ($strength & 1) {
-		$consonants .= 'BDGHJLMNPQRSTVWXZ';
-	}
-	if ($strength & 2) {
-		$vowels .= "AEUY";
-	}
-	if ($strength & 4) {
-		$consonants .= '23456789';
-	}
-	if ($strength & 8) {
-		$consonants .= '@#$%';
-	}
- 
-	$password = '';
-	$alt = time() % 2;
-	for ($i = 0; $i < $length; $i++) {
-		if ($alt == 1) {
-			$password .= $consonants[(rand() % strlen($consonants))];
-			$alt = 0;
-		} else {
-			$password .= $vowels[(rand() % strlen($vowels))];
-			$alt = 1;
-		}
-	}
-	return $password;
+               $strength=0;
+               
+                $vowels = 'aeuy';
+        	$consonants = 'bdghjmnpqrstvz';
+        	if ($strength & 1) {
+        		$consonants .= 'BDGHJLMNPQRSTVWXZ';
+        	}
+        	if ($strength & 2) {
+        		$vowels .= "AEUY";
+        	}
+        	if ($strength & 4) {
+        		$consonants .= '23456789';
+        	}
+        	if ($strength & 8) {
+        		$consonants .= '@#$%';
+        	}
+         
+        	$password = '';
+        	$alt = time() % 2;
+        	for ($i = 0; $i < $length; $i++) {
+        		if ($alt == 1) {
+        			$password .= $consonants[(rand() % strlen($consonants))];
+        			$alt = 0;
+        		} else {
+        			$password .= $vowels[(rand() % strlen($vowels))];
+        			$alt = 1;
+        		}
+        	}
+        	return $password;
     }
 
     public function recoverPasswordAction()
