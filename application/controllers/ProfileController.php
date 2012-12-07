@@ -147,7 +147,7 @@ class ProfileController extends Zend_Controller_Action
                         $data = $form->getValues();
                         $data['user_id'] =  Zend_Auth::getInstance()->getIdentity()->id;
                         $data['state'] = $stateResult['0']['state_id'];
-            $picnumber =$data['picture'] = rand();
+                        $picnumber =$data['picture'] = rand();
 
                         unset($data['pic_upload']);
                         unset($data['pic_uploadSec']);
