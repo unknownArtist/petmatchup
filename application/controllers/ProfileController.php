@@ -18,7 +18,7 @@ class ProfileController extends Zend_Controller_Action
            $getPics = new Application_Model_UserPics();
            $where = "profile_id =".$this->_request->getParam('id');
            $data = array(
-                  'status'              =>   '0'
+                  'status'=>'0'
                   );
            $getPics->update($data,$where);
            $this->_redirect('/profile/list');
@@ -60,27 +60,7 @@ class ProfileController extends Zend_Controller_Action
                        
                         $where = "id = ".$this->_request->getParam('id');
                         $profile->update($data,$where);
-                        
-
-                        //   $where = "profile_id = ".$this->_request->getParam('id');
-                        //   $profileID = $profilePicutres->fetchRow($where)->toArray();
-                        //   $picData = array(
-                        //     $form->getValue("pic_upload"),
-                        //     $form->getValue("pic_uploadSec"),
-                        //     $form->getValue("pic_uploadThird"),
-                        //     $form->getValue("pic_uploadFourth"),
-                        //     );
-
-                        // foreach ($picData as $value) {
-                        //     if(isset($value))
-                        //     {
-                        //         $whereis = "profile_id = ".$this->_request->getParam('id');
-                        //         $updatedImages = array('picture' => $value);                          
-                        //         $profilePicutres->update($updatedImages,$whereis);
-
-                        //     }
-                            
-                        // }
+                    
                         $this->_redirect('profile/list');
                             
                         
@@ -126,6 +106,7 @@ class ProfileController extends Zend_Controller_Action
 
     public function addAction()
     {
+        require_once('imagecrop/class.upload.php');
        if(Zend_Auth::getInstance()->hasIdentity())
         {
 
