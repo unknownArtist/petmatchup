@@ -16,6 +16,17 @@ document.mapApi.submit();
 document.profile.submit();
 }
 </script>
+
+
+<script src="http://www.ingeniousdigital.com/petmatchup/js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<script src="http://www.ingeniousdigital.com/petmatchup/js/jquery.faded.js" type="text/javascript"></script>
+<script type="text/javascript">
+	   $(function(){
+	        $("#faded").faded();
+		});
+</script>
+
+
     </head>
     <body >
 
@@ -24,12 +35,60 @@ document.profile.submit();
       
         <div class="header">
       
-        <div class="logo"><a href="index.html"><img src="../img/logo.gif" alt="" title="" border="0" /></a></div> 
+
+
+				<div class="logodiv"><a href="Index" title="Petmatchup"><img src="../img/logo.png" alt="Petmatchup"></a></div>
+				<div class="headerright">
+				
+					
+					<div class="top-links">
+					<?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
+						<a id="editprofile" href="<?php echo $this->url(array('controller' =>  'Index', 'action'  => 'edit-profile'   )); ?>">My Account (Edit User)</a> 
+						<a id="editprofile" href="<?php echo $this->url(array('controller' =>  'Index', 'action'  => 'logout')); ?>">Logout</a>
+						 <?php  endif; ?> 
+					</div>
+					
+					<!--Social Media Section-->
+					<div class="socialmedia">
+						<div class="socialimg"><a href="#" title="Follow us on Social Media"><img src="../img/social-icon4.png" /></a></div>
+						<div class="socialimg"><a href="#" title="Follow us on Social Media"><img src="../img/social-icon3.png" /></a></div>
+						<div class="socialimg"><a href="#" title="Follow us on Google Plus"><img src="../img/googleplus-icon.png" /></a></div>
+						<div class="socialimg"><a href="#" title="Follow us on Facebook"><img src="../img/facebook-icon.png" /></a></div>
+						<div class="clear"></div>
+					</div>
+					
+					
+					<!--Header Search Section-->
+					<!--<div class="searchsection">
+						<div id="block-system-user-menu">
+							<?php if(!Zend_Auth::getInstance()->hasIdentity()): ?>	
+
+							<div class="content">
+								<ul class="menu"><li><a href="#signin-form" title="Client Login">Client Login</a></li></ul>
+							</div>
+							<?php endif; ?>
+
+						</div>
+						<div id="block-search-form">
+							<form id="search-block-form">
+								<div class="container-inline">
+									<input title="Enter the name of your pet" type="search" Placeholder="Find your pet" size="15" maxlength="128" class="form-text">
+									<input type="submit" value="Search" title="Search Now!" class="form-submit">
+								</div>
+							</form>  
+						</div>
+					</div>-->
+					
+					
+				</div>
+				<div class="clear"></div>
+				
+				
       
             <div id="menu">
               <ul>
                 
-                <li class="selected"> <a href="/index">Home</a> </li> 
+                <li class="selected"> <a href="/Index">Home</a> </li> 
                 <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
                 
                 <li> <a href="/profile/list">Profile</a> </li>
@@ -40,22 +99,29 @@ document.profile.submit();
                 <li> <a href="/contactus">Contact</a></li>
               
             
-       
+       <!--
+	   
+	   
        
          <?php if(Zend_Auth::getInstance()->hasIdentity()): ?>
 
                 <li>
-            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'edit-profile'   )); ?>">Edit User</a>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'Index', 'action'  => 'edit-profile'   )); ?>">Edit User</a>
             
                 </li>
               
        
                 <li>
-            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'index', 'action'  => 'logout')); ?>">logout</a>
+            <a id="editprofile" href="<?php echo $this->url(array('controller' =>  'Index', 'action'  => 'logout')); ?>">logout</a>
                 </li>
       
          <?php  endif; ?> 
+		 
+		 -->
+		 
 
             </ul>
+			
             </div>
          </div>
+<div class="clear"></div>

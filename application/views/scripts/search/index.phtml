@@ -31,6 +31,40 @@
            </div><!--end of center content-->
         
         <div id="test1" class="gmap3"></div>
+		<div id="results" class="search-results">
+
+     <?php  if(isset($this->searchResult))
+          {
+              foreach($this->searchResult as $resultt):
+                  if(isset($resultt['name'])) {echo $resultt['name']."<br />";}
+                  if(isset($resultt['amount'])) {echo $resultt['amount']."<br />";}
+                  if(isset($resultt['details'])) { 
+                    
+                     if(strlen($resultt['details'])<=50)
+                        {
+                          echo $resultt['details'];
+                          echo "<br />";
+                        }
+                        else
+                        {
+                          $y=substr($resultt['details'],0,20) . '...';
+                          echo  $y;
+                          echo "<br />";
+                        }
+                  }
+                  if(isset($resultt['race'])) {echo $resultt['race']."<br />";}
+                  echo "<br />";
+
+              endforeach;
+           
+          }
+
+
+         
+      ?>
+
+    </div>
+		<div class="clear"></div>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <script type="text/javascript" src="js/gmap3.min.js"></script> 
 
@@ -44,7 +78,8 @@
   			color: #FFFFFF;
   			text-align:center;
   			font-family: 'Arial, Helvetica';
-  			font-size:11px;
+        color: #EA6175;
+  			font-size:20px;
   			font-weight:bold;
       }
       .cluster-1{
@@ -83,7 +118,7 @@
     <?php
 
  $zipResult = "67701";
- if(isset($this->searchResult)):
+ if(isset($this->searchResult)){
  foreach($this->searchResult as $resultt):
  
  $desc = $resultt['name']."<br /><br />".
@@ -104,10 +139,10 @@ $db=Zend_Db_Table_Abstract::getDefaultAdapter();
           
           $profile_id=$resultt['id'];
           
-          // $profile_pic=$db->select()->from("profile_pictures")->where("profile_id=?",$profile_id)
-          //                           ->query()
-          //                           ->fetch(Zend_db::FETCH_OBJ)->picture;
-           $profile_pic = NULL;
+           $profile_pic=$db->select()->from("profile_pictures")->where("profile_id=?",$profile_id)
+                                     ->query()
+                                     ->fetch(Zend_db::FETCH_OBJ)->picture;
+           // $profile_pic = NULL;
 //	    echo '<pre>';
 //        print_r(  $profile_pic  );
 //        echo '</pre>';
@@ -122,7 +157,7 @@ $db=Zend_Db_Table_Abstract::getDefaultAdapter();
 
 $content= $resultt['name']."<br />".
  "<a href=/search/get-details/id/".$resultt['id'].">Details</a><br />".
- "<img src='images/".$profile_pic."' height='150' width='200' />";
+ "<img src='user_images/".$profile_pic."' height='150' width='200' />";
 
  
  $data[]='{latLng:['.$latitude.', '.$longitude.'], data:"'.$content.'"}';
@@ -214,6 +249,9 @@ $content= $resultt['name']."<br />".
     </script>
 
 <?php
- endif;
+ }else
+ {
+  echo "<script>No result found</script>";
+ }
 
 ?>

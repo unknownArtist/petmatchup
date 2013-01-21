@@ -49,6 +49,22 @@ class Application_Form_Profile extends Zend_Form
           '0'    =>  'No'
        );
        $statesofamerica = Zend_Registry::get('states');
+
+       $statesOfCanada = array(
+          'Alberta'                 =>  'Alberta',
+          'British Columbia'        =>'British Columbia',
+          'Manitoba'                =>'Manitoba',
+          'New Brunswick'           =>'New Brunswick',
+          'Newfoundland'            =>'Newfoundland',
+          'Northwest Territories'   =>'Northwest Territories',
+          'Nova Scotia'             =>'Nova Scotia',
+          'Nunavut'                 =>'Nunavut',
+          'Ontario'                 =>'Ontario',
+          'Prince Edward Island'    =>'Prince Edward Island',
+          'Quebec'                  =>'Quebec',
+          'Saskatchewan'            =>'Saskatchewan',
+          'Yukon'                   =>'Yukon',
+        );
         
 /////////////////////////////////////////////////////////////////////////////////  
        ///////////////////////////////////////////////////////////////
@@ -78,15 +94,16 @@ class Application_Form_Profile extends Zend_Form
                        ->addFilter('StripTags')
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
+                        ->setAttribs(array('onchange' => 'reload();')) 
                        ->addMultiOptions($selectCountry);
         
         
         $state        = new Zend_Form_Element_Select('state');
-        $state->setLabel('Select State')
-                        ->addFilter('StripTags')
-                        ->addFilter('StringTrim')
-                        ->addValidator('NotEmpty')
-                        ->addMultiOptions($statesofamerica);
+            $state->setLabel('Select State')
+                            ->addFilter('StripTags')
+                            ->addFilter('StringTrim')
+                            ->addValidator('NotEmpty')
+                            ->addMultiOptions($statesofamerica);
         
         $city = new Zend_Form_Element_Text('city');
         $city->setLabel('City')

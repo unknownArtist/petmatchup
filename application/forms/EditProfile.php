@@ -7,6 +7,7 @@ class Application_Form_EditProfile extends Zend_Form
     {
     	$this->setMethod('post');
         $this->setAction('#');
+		$this->setAttrib('id','set-edit-profile');
 
         $FirstName = new Zend_Form_Element_Text('f_name');
         $FirstName->setRequired(TRUE)

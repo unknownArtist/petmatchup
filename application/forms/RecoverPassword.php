@@ -7,6 +7,7 @@ class Application_Form_RecoverPassword extends Zend_Form
     {
         $this->setAction('');
         $this->setMethod('post');
+		$this->setAttrib('id','recover-password');
 
 
           $email = new Zend_Form_Element_Text('email');

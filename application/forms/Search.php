@@ -38,7 +38,22 @@ class Application_Form_Search extends Zend_Form
        
        
        $statesofamerica = Zend_Registry::get('states');
-        
+       $statesOfCanada = array(
+          
+          'Alberta'                 =>  'Alberta',
+          'British Columbia'        =>'British Columbia',
+          'Manitoba'                =>'Manitoba',
+          'New Brunswick'           =>'New Brunswick',
+          'Newfoundland'            =>'Newfoundland',
+          'Northwest Territories'   =>'Northwest Territories',
+          'Nova Scotia'             =>'Nova Scotia',
+          'Nunavut'                 =>'Nunavut',
+          'Ontario'                 =>'Ontario',
+          'Prince Edward Island'    =>'Prince Edward Island',
+          'Quebec'                  =>'Quebec',
+          'Saskatchewan'            =>'Saskatchewan',
+          'Yukon'                   =>'Yukon',
+        );
  
         
         //////////////////////////////////////////////////////////////////
@@ -133,12 +148,15 @@ class Application_Form_Search extends Zend_Form
            $MaleFemail,
            $Country,
            $state,
+           $statecan,
            //$city,
            $zip,
            $submit,
 
 
         ));
+
+        print_r($this->getValues());
         
     }
 

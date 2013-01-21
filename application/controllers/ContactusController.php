@@ -13,8 +13,8 @@ class ContactusController extends Zend_Controller_Action
         $smtpConfigs = array(
             
             'auth'          =>      'login',
-            'username'      =>      'nayatelorg@gmail.com',
-            'password'      =>      'quickbrown123',
+            'username'      =>      'contact@petmatchup.com',
+            'password'      =>      'pl3d3m@.',
             'ssl'           =>      'ssl',
             'port'          =>       465
             

@@ -36,7 +36,7 @@ class IndexController extends Zend_Controller_Action
              if($result->isValid())
                {
                     $auth->getStorage()->write($authAdapter->getResultRowObject(array('id', 'f_name','level')));
-                    $this->_redirect('index');
+                    $this->_redirect('Index');
                }
                else
             {
@@ -59,7 +59,7 @@ class IndexController extends Zend_Controller_Action
     public function logoutAction()
     {
         Zend_Auth::getInstance()->clearIdentity();
-        $this->_redirect('index');
+        $this->_redirect('Index');
     }
 
     public function editProfileAction()

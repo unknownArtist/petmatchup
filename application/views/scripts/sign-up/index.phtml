@@ -1,13 +1,13 @@
+<div class="center_content">
 <?php 
 
  echo $this->form;
  
  ?>
 
-<br />
-<br />
+
 <?php 
-   echo $this->message. "<br />";
+   echo $this->message. "";
    
 ?>
 <?php if(isset ($this->signin)): ?>
@@ -18,3 +18,4 @@
 <?php if(isset($this->errorMsg)): ?>
  <?php echo $this->errorMsg; ?>
 <?php endif; ?>
+</div>

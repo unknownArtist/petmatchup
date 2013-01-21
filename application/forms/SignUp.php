@@ -8,6 +8,7 @@ class Application_Form_SignUp extends Zend_Form
         /* Form Elements & Other Definitions Here ... */
         $this->setMethod('post');
         $this->setAction('#');
+		$this->setAttrib('id','signup-form');
         
         
         
