@@ -72,7 +72,7 @@ class Application_Form_Search extends Zend_Form
         $whichAnimal        = new Zend_Form_Element_Select('kind');
         $whichAnimal->setLabel('Search For')
                        ->addFilter('StripTags')
-                       ->setRequired(true)
+                      // ->setRequired(true)
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
                        ->addMultiOptions($animal);
@@ -93,7 +93,7 @@ class Application_Form_Search extends Zend_Form
         
         $MaleFemail        = new Zend_Form_Element_Select('sex');
         $MaleFemail->setLabel('Sex')
-        ->setRequired(true)
+        //->setRequired(true)
                       ->addFilter('StripTags')
                       ->addFilter('StringTrim')
                       ->addValidator('NotEmpty')
@@ -109,14 +109,14 @@ class Application_Form_Search extends Zend_Form
         $Country        = new Zend_Form_Element_Select('Country');
         $Country->setLabel('Select Country')
                        ->addFilter('StripTags')
-                       ->setRequired(true)
+                      // ->setRequired(true)
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
                         ->addMultiOptions($selectCountry);
 
         $state        = new Zend_Form_Element_Select('states');
         $state->setLabel('Select State')
-        ->setRequired(true)
+        //->setRequired(true)
                         ->addFilter('StripTags')
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
@@ -124,8 +124,7 @@ class Application_Form_Search extends Zend_Form
 
         $statecan        = new Zend_Form_Element_Select('statecan');
         
-        $statecan->setRequired(true)
-                        ->addFilter('StripTags')
+        $statecan->addFilter('StripTags')
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
                         ->addMultiOptions($statesOfCanada);

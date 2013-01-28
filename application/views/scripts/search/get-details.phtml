@@ -4,6 +4,7 @@
 	<strong>Name</strong><li> <?php	echo $pd['name'];  ?></li>
 	<strong>Type</strong><li> 
 	<?php	
+	// echo $pd['type'];
 			$profileType = new Application_Model_ProfileType();
 			$where = 'id = '. $pd['type'];
 			$ptype = $profileType->fetchAll($where)->toArray();
@@ -19,13 +20,18 @@
 		if(is_numeric($pd['state'])):
 		
 			$getStates = new Application_Model_State();	
-			$stateResult = $getStates->fetchAll("state_id =".$pd['state'])->toArray();
+			$where = 'state_id = '. $pd['state'];
+			$stateResult = $getStates->fetchAll($where)->toArray();
+			foreach($stateResult as $value):
+			echo $value['state'];
+			endforeach;
+			//$stateResult = $getStates->fetchAll("state_id =".$pd['state'])->toArray();
 
 			// foreach ($stateResult as $value){echo "hello".$stateRow = $value['state'];}
          
         else:
         
-        	echo "hello".$pd['state'];
+        	echo $pd['state'];
         endif;
 
 				?>

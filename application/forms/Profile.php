@@ -98,7 +98,7 @@ class Application_Form_Profile extends Zend_Form
                         ->addMultiOptions($selectCountry);
         
         
-        $state        = new Zend_Form_Element_Select('state');
+        $state        = new Zend_Form_Element_Select('states');
             $state->setLabel('Select State')
                             ->addFilter('StripTags')
                             ->addFilter('StringTrim')

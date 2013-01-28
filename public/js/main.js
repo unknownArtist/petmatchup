@@ -17,20 +17,21 @@ $(document).ready(function(){
 
 $(document).ready(function(){
         $("#statecan").hide();
+
         $this = $("#Country");
         $this.change(function(){
 
-            
             if($this.val() == "1")
             {
-
-                $('#state').show();
+                $('#states').show();
                 $('#statecan').hide();
             }
+
             if($this.val() == "0")
             {
-                $('#state').hide();
+                $('#states').hide();
                 $('#statecan').show();
+
             }    
         });
     });
