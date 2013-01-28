@@ -41,14 +41,14 @@
                   if(isset($resultt['details'])) { 
                     
                      if(strlen($resultt['details'])<=50)
-                        {
-                          echo $resultt['details'];
+                                               {
+                          ?><a href="/search/get-details/id/<?php echo $resultt['id']; ?>"><?php echo $resultt['details'];?></a><?php
                           echo "<br />";
                         }
                         else
                         {
                           $y=substr($resultt['details'],0,20) . '...';
-                          echo  $y;
+                          ?><a href="/search/get-details/id/<?php echo $resultt['id']; ?>"><?php echo  $y;?></a><?php 
                           echo "<br />";
                         }
                   }
