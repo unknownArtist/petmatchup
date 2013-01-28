@@ -114,7 +114,7 @@ class Application_Form_Search extends Zend_Form
                         ->addValidator('NotEmpty')
                         ->addMultiOptions($selectCountry);
 
-        $state        = new Zend_Form_Element_Select('states');
+        $state        = new Zend_Form_Element_Select('state');
         $state->setLabel('Select State')
         //->setRequired(true)
                         ->addFilter('StripTags')

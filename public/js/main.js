@@ -23,13 +23,13 @@ $(document).ready(function(){
 
             if($this.val() == "1")
             {
-                $('#states').show();
+                $('#state').show();
                 $('#statecan').hide();
             }
 
             if($this.val() == "0")
             {
-                $('#states').hide();
+                $('#state').hide();
                 $('#statecan').show();
 
             }    
