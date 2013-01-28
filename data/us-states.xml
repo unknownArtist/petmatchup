@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <choices>
+  <item><label></label><value></value></item>
   <item><label>Alabama</label><value>AL</value></item>
   <item><label>Alaska</label><value>AK</value></item>
   <item><label>Arizona</label><value>AZ</value></item>

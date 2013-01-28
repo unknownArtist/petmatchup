@@ -7,8 +7,9 @@ class Application_Form_Profile extends Zend_Form
     {
 
         $selectCountry = array( 
+            '1'   =>  'America',
             '0'   =>  'Canada',
-            '1'   =>  'America'
+            
             
             );
         
@@ -89,13 +90,12 @@ class Application_Form_Profile extends Zend_Form
                                       )
                        ));
         
-        $Country        = new Zend_Form_Element_Select('country');
+        $Country        = new Zend_Form_Element_Select('Country');
         $Country->setLabel('Select Country')
                        ->addFilter('StripTags')
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
-                        ->setAttribs(array('onchange' => 'reload();')) 
-                       ->addMultiOptions($selectCountry);
+                        ->addMultiOptions($selectCountry);
         
         
         $state        = new Zend_Form_Element_Select('state');
@@ -104,6 +104,13 @@ class Application_Form_Profile extends Zend_Form
                             ->addFilter('StringTrim')
                             ->addValidator('NotEmpty')
                             ->addMultiOptions($statesofamerica);
+
+         $statecan        = new Zend_Form_Element_Select('statecan');
+                $statecan->setRequired(true)
+                        ->addFilter('StripTags')
+                        ->addFilter('StringTrim')
+                        ->addValidator('NotEmpty')
+                        ->addMultiOptions($statesOfCanada);
         
         $city = new Zend_Form_Element_Text('city');
         $city->setLabel('City')
@@ -314,6 +321,7 @@ class Application_Form_Profile extends Zend_Form
             $Accessiblename,
             $Country,
             $state,
+            $statecan,
             $city,
             $zip,
             $kind,

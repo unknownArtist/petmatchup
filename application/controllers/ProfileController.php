@@ -48,7 +48,7 @@ class ProfileController extends Zend_Controller_Action
                         $data = array();
 
                         $getStates = new Application_Model_State();
-                        $state = $form->getValue('state');
+                        $state = $form->getValue('states');
                         $stateResult = $getStates->fetchAll("state_abbr = '$state'")->toArray();
                         $data = $form->getValues();
                         $data['state'] = $stateResult['0']['state_id'];
@@ -122,14 +122,27 @@ class ProfileController extends Zend_Controller_Action
                     {
                         $data = array();
 
-                        $getStates = new Application_Model_State();
-                        $state = $form->getValue('state');
-                        $stateResult = $getStates->fetchAll("state_abbr = '$state'")->toArray();
                         $data = $form->getValues();
-                        $data['user_id'] =  Zend_Auth::getInstance()->getIdentity()->id;
-                        $data['state'] = $stateResult['0']['state_id'];
+                        
+                        if($data['Country'] == 0)
+                        {
+                          $data['user_id'] =  Zend_Auth::getInstance()->getIdentity()->id;
+                          $data['state'] = $data['statecan'];
+                          unset($data['statecan']);
+                                                    
+                        }else
+                        {
+                            $getStates = new Application_Model_State();
+                            $state = $form->getValue('state');
+                            $stateResult = $getStates->fetchAll("state_abbr = '$state'")->toArray();
+                            
+                             $data['user_id'] =  Zend_Auth::getInstance()->getIdentity()->id;
+                             $data['state'] = $stateResult['0']['state_id'];
+                             unset($data['statecan']);
+                        }
+                      
                         $picnumber =$data['picture'] = rand();
-
+                      
                         unset($data['pic_upload']);
                         unset($data['pic_uploadSec']);
                         unset($data['pic_uploadThird']);
@@ -156,12 +169,7 @@ class ProfileController extends Zend_Controller_Action
                                     'profile_id' => $profileID['id'],
                                     'status'     => '1'
                                     );   
-
-                                  // $value->image_resize = true;
-                                  // $value->image_convert = gif;
-                                  // $value->image_x = 100;
-                                  // $value->image_ratio_y = true;
-                                  // $value->Process('/public/images/');                       
+                   
                                $profilePicutres->insert($updatedImages);
                                
                             }

@@ -40,6 +40,7 @@ class Application_Form_Search extends Zend_Form
        $statesofamerica = Zend_Registry::get('states');
        $statesOfCanada = array(
           
+          ''                        =>  '',
           'Alberta'                 =>  'Alberta',
           'British Columbia'        =>'British Columbia',
           'Manitoba'                =>'Manitoba',
@@ -120,6 +121,14 @@ class Application_Form_Search extends Zend_Form
                         ->addFilter('StringTrim')
                         ->addValidator('NotEmpty')
                         ->addMultiOptions($statesofamerica);
+
+        $statecan        = new Zend_Form_Element_Select('statecan');
+        
+        $statecan->setRequired(true)
+                        ->addFilter('StripTags')
+                        ->addFilter('StringTrim')
+                        ->addValidator('NotEmpty')
+                        ->addMultiOptions($statesOfCanada);
 
         $city         = new Zend_Form_Element_Text('city');
         $city->setLabel('City')

@@ -14,15 +14,34 @@
 	 </li>
 	
 	
-	<strong>State</strong><li><?php 
+	<strong>State</strong><li><?php
+
+		if(is_numeric($pd['state'])):
+		
 			$getStates = new Application_Model_State();	
 			$stateResult = $getStates->fetchAll("state_id =".$pd['state'])->toArray();
-			foreach ($stateResult as $value){echo $stateRow = $value['state'];}
 
+			// foreach ($stateResult as $value){echo "hello".$stateRow = $value['state'];}
+         
+        else:
+        
+        	echo "hello".$pd['state'];
+        endif;
 
 				?>
 	</li>
-	<strong>Country</strong> <?php  if(isset($pd['country'])) {	echo "<li>"."America"."</li>"; }?>
+	<strong>Country</strong><li> <?php  if(isset($pd['country'])) 
+	{
+		if($pd['country'] == 1)
+		{
+			echo "America";
+		}
+		else
+		{
+			echo "Canada";
+		}
+    }
+    ?></li>
  	
  	<strong>City</strong> <?php  if(isset($pd['city'])) {	echo "<li>".$pd['city']."</li>"; }?>
  	
