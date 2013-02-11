@@ -14,13 +14,13 @@ class ContactusController extends Zend_Controller_Action
             
             'auth'          =>      'login',
             'username'      =>      'contact@petmatchup.com',
-            'password'      =>      'pl3d3m@.',
+            'password'      =>      'pl3d35m@',
             'ssl'           =>      'ssl',
             'port'          =>       465
             
         );
         
-        $smtpTransportObject = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $smtpConfigs);
+        $smtpTransportObject = new Zend_Mail_Transport_Smtp('server1.ingeniousdigital.com', $smtpConfigs);
         
         $mail = new Zend_Mail();
         
@@ -35,10 +35,10 @@ class ContactusController extends Zend_Controller_Action
     if ($this->getRequest()->isPost() && $this->view->form->isValid($this->_getAllParams()))
         
        {
-        $mail->addTo($_POST['email'], $_POST['name'])
-             ->setFrom('rooott@gmail.com', "saqib")
+        $mail->addTo('contact@petmatchup.com', "petmatchup")
+             ->setFrom($_POST['email'], $_POST['name'])
              ->setSubject('its a test email')
-             ->setBodyText($_POST['message']. '<br />'. $_POST['phone'])
+             ->setBodyHtml($_POST['message']. '<br />'.'<br />'. 'Tel # ' .$_POST['phone'])
              ->send($smtpTransportObject);
            $this->_redirect('contactus');
            

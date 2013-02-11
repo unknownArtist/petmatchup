@@ -26,10 +26,10 @@ class Application_Form_Profile extends Zend_Form
         );
        
        $profileType = array(
-            '0'   =>  'For mating',
-            '1'   =>  'For sale',
-            '2'   =>  'Adoption',
-            '3'   =>  'Showcase'
+            '1'   =>  'For mating',
+            '2'   =>  'For sale',
+            '3'   =>  'Adoption',
+            '4'   =>  'Showcase'
        );
        
        $nego    = array(
