@@ -30,11 +30,18 @@ class SearchController extends Zend_Controller_Action
         $race         = $this->getRequest()->getParam('race');
         $MaleFemale   = $this->getRequest()->getParam('sex');
         $Country      = $this->getRequest()->getParam('Country');
-        $stateRow     = $this->getRequest()->getParam('states');
+       // $stateRow     = $this->getRequest()->getParam('states');
         $zip          = $this->getRequest()->getParam('zip');
+
+        if($Country == 1)
+        {
         $stateResult  = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
         $stateRow = $stateResult[0]['state_id'];
-        
+        }
+        else
+        {
+        $stateRow = $this->getRequest()->getParam('states');
+        }
 
 
         $selectDetails = $selectDetails->from('profiles');

@@ -51,13 +51,23 @@ class ProfileController extends Zend_Controller_Action
                         $state = $form->getValue('states');
                         $stateResult = $getStates->fetchAll("state_abbr = '$state'")->toArray();
                         $data = $form->getValues();
-                        $data['state'] = $stateResult['0']['state_id'];
-            
+                        //$data['state'] = $stateResult['0']['state_id'];
+                       if($data['Country'] == 0)
+                        {
+                          $data['user_id'] =  Zend_Auth::getInstance()->getIdentity()->id;
+                          $data['state'] = $data['statecan'];
+                          unset($data['statecan']);
+                                                    
+                        }else
+                        {
+                          $data['state'] = $stateResult['0']['state_id'];
+                        }
+                        
                         unset($data['pic_upload']);
                         unset($data['pic_uploadSec']);
                         unset($data['pic_uploadThird']);
                         unset($data['pic_uploadFourth']);
-                       
+
                         $where = "id = ".$this->_request->getParam('id');
                         $profile->update($data,$where);
                     
