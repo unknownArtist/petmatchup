@@ -47,9 +47,10 @@ class SignUpController extends Zend_Controller_Action
                       $form->getValue('email');
                       $this->view->signin = "Sign in";
                       $email = $form->getValue('email');
+                      $name = $form->getValue('f_name');
                       $form->reset();
 
-                      $this->mailToContactAction($email,$pass);
+                      $this->mailToContactAction($email,$pass,$name);
                      }
 
                      // $this->_redirect('index');
@@ -64,7 +65,7 @@ class SignUpController extends Zend_Controller_Action
             
     }
 
-    public function mailToContactAction($email, $pass)
+    public function mailToContactAction($email, $pass,$name)
     {
        
       // $pass =  $this->randGenAction();
@@ -75,22 +76,22 @@ class SignUpController extends Zend_Controller_Action
        $smtpConfigs = array(
             
             'auth'          =>      'login',
-            'username'      =>      'nayab.rajpoot',
-            'password'      =>      'jeerry1979',
+            'username'      =>      'petmatchup@petmatchup.com',
+            'password'      =>      'pl3d35m@',
             'ssl'           =>      'ssl',
             'port'          =>       465
             
         );
         
-        $smtpTransportObject = new Zend_Mail_Transport_Smtp('smtp.gmail.com', $smtpConfigs);
+        $smtpTransportObject = new Zend_Mail_Transport_Smtp('server1.ingeniousdigital.com', $smtpConfigs);
         
         $mail = new Zend_Mail();
   
         $form = new Application_Form_ContactUS();
   
  
-        $mail->addTo($email,"john evans")
-             ->setFrom('habibsehrish@gmail.com', "nayatel")
+        $mail->addTo($email,$name)
+             ->setFrom('petmatchup@petmatchup.com', "Petmatchup")
              ->setSubject('Account Confirmation')
              ->setBodyText('your pin code is '. " " .$pass . " " .'After you logged in kindly set you desired password')
              ->send($smtpTransportObject);
