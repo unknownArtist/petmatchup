@@ -82,6 +82,8 @@ class SearchController extends Zend_Controller_Action
             $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
         }
+
+         
         
           $result=$selectDetails;
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
