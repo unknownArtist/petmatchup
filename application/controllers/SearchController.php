@@ -10,28 +10,39 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
         $SearchForm = new Application_Form_Search();
         $this->view->form = $SearchForm;
         $AppliedSearch = Zend_Db_Table::getDefaultAdapter();
         $selectDetails = new Zend_Db_Select($AppliedSearch);
         $getStates = new Application_Model_State();
 
-        $values=$this->getRequest()->getParams();
-
-        if (!empty($values['profileType'])) {
+       // $values = $SearchForm->getValues();
+         $values=$this->getRequest()->getParams();
+        
+     if (!empty($values['profileType'])) {
           
         $formData = $values;
-            if($SearchForm->isValid($formData))
-            {
+           if($SearchForm->isValid($formData))
+           {
           
-        $protype      = $this->getRequest()->getParam('profileType');
-        $whichAnimal  = $this->getRequest()->getParam('kind');
-        $race         = $this->getRequest()->getParam('race');
-        $MaleFemale   = $this->getRequest()->getParam('sex');
-        $Country      = $this->getRequest()->getParam('Country');
-       // $stateRow     = $this->getRequest()->getParam('states');
-        $zip          = $this->getRequest()->getParam('zip');
+       //  $protype      = $this->getRequest()->getParam('profileType');
+       //  $whichAnimal  = $this->getRequest()->getParam('kind');
+       //  $race         = $this->getRequest()->getParam('race');
+       //  $MaleFemale   = $this->getRequest()->getParam('sex');
+       //  $Country      = $this->getRequest()->getParam('Country');
+       //  $stateRow     = $this->getRequest()->getParam('states');
+       //  $zip          = $this->getRequest()->getParam('zip');
 
+        $protype = $values['profileType'];
+        $whichAnimal = $values['kind'];
+        $race = $values['race'];
+        $MaleFemale = $values['sex'];
+        $Country = $values['Country'];
+        $state = $values['states'];
+        $city = $values['city'];
+        $zip = $values['zip'];
+     
         if($Country == 1)
         {
         $stateResult  = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
@@ -44,7 +55,7 @@ class SearchController extends Zend_Controller_Action
 
         $selectDetails = $selectDetails->from('profiles');
            
- if(empty($zip)){
+     if(empty($zip)){
         if (!empty($protype)) {
 
             $selectDetails = $selectDetails->where('type =?',$protype);
@@ -77,14 +88,14 @@ class SearchController extends Zend_Controller_Action
             $selectDetails = $selectDetails->where('state =?',$stateRow);
 
         }
-       // if (!empty($zip)) {
+        // if (!empty($zip)) {
 
-          //$selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+       //    $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
-        //}
+       //  }
        }
        else
-       {
+        {
         $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
           if (!empty($protype)) {
 
@@ -112,8 +123,9 @@ class SearchController extends Zend_Controller_Action
             // $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
        // }
+    }
 
-       }
+      
           $result=$selectDetails;
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
                 
@@ -124,9 +136,10 @@ class SearchController extends Zend_Controller_Action
           $this->view->searchResult = $Paginatedresult;
         }  
               
-            } else {
-                $SearchForm->populate($formData);
-            }
+            } 
+            else {
+                 $SearchForm->populate($formData);
+             }
          }
     }
 
