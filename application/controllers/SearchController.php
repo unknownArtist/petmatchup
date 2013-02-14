@@ -18,9 +18,8 @@ class SearchController extends Zend_Controller_Action
 
         $values=$this->getRequest()->getParams();
 
-        
         if (!empty($values['profileType'])) {
-        
+          
         $formData = $values;
             if($SearchForm->isValid($formData))
             {
@@ -43,8 +42,9 @@ class SearchController extends Zend_Controller_Action
         $stateRow = $this->getRequest()->getParam('states');
         }
 
-
         $selectDetails = $selectDetails->from('profiles');
+           
+ if(empty($zip)){
         if (!empty($protype)) {
 
             $selectDetails = $selectDetails->where('type =?',$protype);
@@ -77,12 +77,43 @@ class SearchController extends Zend_Controller_Action
             $selectDetails = $selectDetails->where('state =?',$stateRow);
 
         }
-        if (!empty($zip)) {
+       // if (!empty($zip)) {
 
-            $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+          //$selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+
+        //}
+       }
+       else
+       {
+        $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+          if (!empty($protype)) {
+
+            $selectDetails = $selectDetails->where('type =?',$protype);
 
         }
-        
+
+        if (!empty($whichAnimal)) {
+
+            $selectDetails = $selectDetails->where('kind =?',$whichAnimal);
+
+        }
+        if (!empty($MaleFemale)) {
+
+            $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
+
+        }
+        if (!empty($race)) {
+
+            $selectDetails = $selectDetails->where('race LIKE ?',"$race%");
+
+        }
+         // if (!empty($zip)) {
+
+            // $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+
+       // }
+
+       }
           $result=$selectDetails;
                 $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
                 
