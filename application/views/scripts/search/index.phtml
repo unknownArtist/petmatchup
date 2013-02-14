@@ -142,13 +142,7 @@ $db=Zend_Db_Table_Abstract::getDefaultAdapter();
            $profile_pic=$db->select()->from("profile_pictures")->where("profile_id=?",$profile_id)
                                      ->query()
                                      ->fetch(Zend_db::FETCH_OBJ)->picture;
-           // $profile_pic = NULL;
-//	    echo '<pre>';
-//        print_r(  $profile_pic  );
-//        echo '</pre>';
-//        
-//        die('DEBUG');
-////     
+
       $latitude = $valuee['lat'];
     $longitude = $valuee['lon'];
  
