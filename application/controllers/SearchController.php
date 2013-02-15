@@ -10,138 +10,116 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
         $SearchForm = new Application_Form_Search();
         $this->view->form = $SearchForm;
         $AppliedSearch = Zend_Db_Table::getDefaultAdapter();
         $selectDetails = new Zend_Db_Select($AppliedSearch);
         $getStates = new Application_Model_State();
 
-       // $values = $SearchForm->getValues();
-         $values=$this->getRequest()->getParams();
+        $values=$this->getRequest()->getParams();
+
         
-     if (!empty($values['profileType'])) {
-          
+        // if (!empty($values['profileType'])) {
+        
         $formData = $values;
-           if($SearchForm->isValid($formData))
-           {
+            // if($SearchForm->isValid($formData))
+            // {
           
-       //  $protype      = $this->getRequest()->getParam('profileType');
-       //  $whichAnimal  = $this->getRequest()->getParam('kind');
-       //  $race         = $this->getRequest()->getParam('race');
-       //  $MaleFemale   = $this->getRequest()->getParam('sex');
-       //  $Country      = $this->getRequest()->getParam('Country');
-       //  $stateRow     = $this->getRequest()->getParam('states');
-       //  $zip          = $this->getRequest()->getParam('zip');
-
-        $protype = $values['profileType'];
-        $whichAnimal = $values['kind'];
-        $race = $values['race'];
-        $MaleFemale = $values['sex'];
-        $Country = $values['Country'];
-        $state = $values['states'];
-        $city = $values['city'];
-        $zip = $values['zip'];
-     
-        if($Country == 1)
-        {
+        $protype      = $this->getRequest()->getParam('profileType');
+        $whichAnimal  = $this->getRequest()->getParam('kind');
+        $race         = $this->getRequest()->getParam('race');
+        $MaleFemale   = $this->getRequest()->getParam('sex');
+        $Country      = $this->getRequest()->getParam('Country');
+        $stateRow     = $this->getRequest()->getParam('state');
+        $zip          = $this->getRequest()->getParam('zip');
         $stateResult  = $getStates->fetchAll("state_abbr = '$stateRow'")->toArray();
+
         $stateRow = $stateResult[0]['state_id'];
-        }
-        else
-        {
-        $stateRow = $this->getRequest()->getParam('states');
-        }
 
-        $selectDetails = $selectDetails->from('profiles');
-           
-     if(empty($zip)){
-        if (!empty($protype)) {
-
-            $selectDetails = $selectDetails->where('type =?',$protype);
-
-        }
-
-        if (!empty($whichAnimal)) {
-
-            $selectDetails = $selectDetails->where('kind =?',$whichAnimal);
-
-        }
-        if (!empty($MaleFemale)) {
-
-            $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
-
-        }
+        $z = $this
+        ->getDefaultAdapter()
+        ->query("SELECT * FROM profiles")
+        ->fetchAll();
+        print_r($z);
+        die();
+    //     $selectDetails = $selectDetails->from('profiles');
+    // if(!empty($zip))
+    // {
         
-        if (!empty($Country)) {
+    //     if (!empty($protype)) {
 
-            $selectDetails = $selectDetails->where('country=?',$Country);
+    //         $selectDetails = $selectDetails->where('type =?',$protype);
 
-        }
-        if (!empty($race)) {
+    //     }
 
-            $selectDetails = $selectDetails->where('race LIKE ?',"$race%");
+    //     if (!empty($whichAnimal)) {
 
-        }
-         if (!empty($stateRow)) {
+    //         $selectDetails = $selectDetails->where('kind =?',$whichAnimal);
+
+    //     }
+    //     if (!empty($MaleFemale)) {
+
+    //         $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
+
+    //     }
+        
+    //     if (!empty($Country)) {
+
+    //         $selectDetails = $selectDetails->where('country=?',$Country);
+
+    //     }
+    //     if (!empty($race)) {
+
+    //         $selectDetails = $selectDetails->where('race LIKE ?',"$race%");
+
+    //     }
+    //      if (!empty($stateRow)) {
              
-            $selectDetails = $selectDetails->where('state =?',$stateRow);
+    //         $selectDetails = $selectDetails->where('state =?',$stateRow);
 
-        }
-        // if (!empty($zip)) {
+    //     }
 
-       //    $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
+    // }else
+    // {
+    //     if (!empty($zip)) {
 
-       //  }
-       }
-       else
-        {
-        $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
-          if (!empty($protype)) {
+    //         $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
 
-            $selectDetails = $selectDetails->where('type =?',$protype);
+    //     }
+    //      if (!empty($protype)) {
 
-        }
+    //         $selectDetails = $selectDetails->where('type =?',$protype);
 
-        if (!empty($whichAnimal)) {
+    //     }
+    //       if (!empty($whichAnimal)) {
 
-            $selectDetails = $selectDetails->where('kind =?',$whichAnimal);
+    //         $selectDetails = $selectDetails->where('kind =?',$whichAnimal);
 
-        }
-        if (!empty($MaleFemale)) {
+    //     }
+    //     if (!empty($MaleFemale)) {
 
-            $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
+    //         $selectDetails = $selectDetails->where('sex=?',$MaleFemale);
 
-        }
-        if (!empty($race)) {
-
-            $selectDetails = $selectDetails->where('race LIKE ?',"$race%");
-
-        }
-         // if (!empty($zip)) {
-
-            // $selectDetails = $selectDetails->where('zipcode LIKE ?',"$zip%");
-
-       // }
-    }
-
-      
-          $result=$selectDetails;
-                $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
+    //     }
+    // }
+    //   var_dump($selectDetails);
+    //   die();
+    //       $result=$selectDetails;
+    //             $searchResult = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($result));
                 
-                $Paginatedresult = $searchResult->setItemCountPerPage(250)->
-                    setCurrentPageNumber($this->_getParam('page', 1));
+    //             $Paginatedresult = $searchResult->setItemCountPerPage(250)->
+    //                 setCurrentPageNumber($this->_getParam('page', 1));
      
-        if ( count($Paginatedresult) ) {
-          $this->view->searchResult = $Paginatedresult;
-        }  
+    //     if ( count($Paginatedresult) ) {
+    //       $this->view->searchResult = $Paginatedresult;
+    //     }  
               
-            } 
-            else {
-                 $SearchForm->populate($formData);
-             }
-         }
+    //         } else {
+    //             $SearchForm->populate($formData);
+    //         }
+    //      }
     }
+
 
     public function searchProfileAction()
     {
