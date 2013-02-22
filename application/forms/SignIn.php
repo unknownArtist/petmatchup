@@ -1,3 +1,4 @@
+
 <?php
 
 class Application_Form_SignIn extends Zend_Form
@@ -23,10 +24,15 @@ class Application_Form_SignIn extends Zend_Form
                  ->setErrorMessages(array('Password is Required'))
                  ->setRequired(TRUE)
                  ->addFilter('StripTags')
+                 //->setAttrib('autofocus', "password")
                  ->addFilter('StringTrim');
         
         
         $submit = new Zend_Form_Element_Submit('Login');
+//         $submit->setAttrib('onSubmit', "window.location = 
+// 'index/index/div/'+document.getElementById('#login-form').value; 
+// return false;"); 
+         //$submit->setAttrib('onSubmit','window.location ="#login-form";return true;');
         $submit->class = "register";
         $this->addElements(array(
             

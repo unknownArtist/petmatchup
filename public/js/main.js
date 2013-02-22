@@ -35,3 +35,11 @@ $(document).ready(function(){
             }    
         });
     });
+
+ 
+// $(document).ready(function(){
+//  $(".register").click(function(e){
+//   e.preventDefault();
+//  $("#email").focus();
+// });
+//  });

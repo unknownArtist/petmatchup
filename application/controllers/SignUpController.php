@@ -65,7 +65,7 @@ class SignUpController extends Zend_Controller_Action
             
     }
 
-    public function mailToContactAction($email, $pass,$name)
+    public function mailToContactAction($email,$pass,$name)
     {
        
       // $pass =  $this->randGenAction();
@@ -159,7 +159,7 @@ class SignUpController extends Zend_Controller_Action
                       $randNumber = $this->randGenAction();
                       $data = array('password' => sha1($randNumber));
                       $getEmail->update($data, $where);
-                      $this->mailToContactAction($formEmail,$randNumber);
+                      $this->mailToContactAction($formEmail,$randNumber,$email['f_name']);
 
                     $this->view->successMessage = "Your password is sent to this email"." ".$formEmail;
 

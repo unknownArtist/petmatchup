@@ -1,4 +1,5 @@
-
+<!-- <body onload = "window.location='#login-form'">
+ -->
 
 <div class="center_content">
 			<div class="banner">
@@ -33,6 +34,19 @@
 							
 							<div class="signin-section">
 								<div class="login-form"><?php echo $this->SignIn; ?></div>
+								<?php if(isset($this->SignUpError)) { 
+									echo $this->SignUpError; }
+									if($this->SignUpError !=null){?>
+								<script>
+								 // $(document).ready(function(){
+								 $(".register").click(function(e){
+								  e.preventDefault();
+								 $("#email").focus();
+								});
+								 // });
+								</script> 
+								<?php 
+							}?>
 								<div class="forgot-password"><a id="editprofile" href="<?php echo $this->url(array('controller' =>'sign-up','action'  => 'recover-password')); ?>">Forget Password</a></div>
 							</div>
 													
@@ -41,7 +55,7 @@
 							<h2>Create an account</h2>
 							<p>Please create an account and find a brand new way for you and your dog to meet new friends in your neighborhood</p>
 							<div class="create-button">
-                				<?php if(isset($this->SignUpError)) { echo $this->SignUpError; }?> 
+                				
                 				<a href="sign-up" class="createaccount">Create Account</a>
 							</div>
 						</div>
